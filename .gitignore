@@ -420,3 +420,4 @@
 # ### Interview answer
 
 # > **`.gitignore` is a special Git file used to specify files and directories that Git should not track. It is commonly used for sensitive files such as `.env`, generated files such as `node_modules` and `__pycache__`, build artifacts, logs, and IDE-specific files. This keeps the repository clean and prevents unnecessary or sensitive files from being committed.**
+node_modules
