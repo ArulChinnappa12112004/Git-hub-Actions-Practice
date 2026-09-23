@@ -19,3 +19,122 @@ jobs:
                 exit 1
             - name : Say goodbye
               run : echo "Goodbye!"
+
+
+# ## GitHub Actions — Failed Step Short Note
+
+# ### 1. `steps`
+
+# A GitHub Actions job contains multiple **steps**, and they normally execute in order.
+
+# ```yaml
+# steps:
+#   - name: Step 1
+#     run: echo "Hello"
+
+#   - name: Step 2
+#     run: echo "Goodbye"
+# ```
+
+# ---
+
+# ### 2. `run: |`
+
+# ```yaml
+# run: |
+#   echo "I will fail"
+#   exit 1
+# ```
+
+# `|` means **multiple lines of shell commands** belong to the same step.
+
+# So this is **one GitHub Actions step**, containing two shell commands.
+
+# ---
+
+# ### 3. `exit 1`
+
+# ```bash
+# exit 1
+# ```
+
+# means:
+
+# > Stop the script and return a **non-zero exit code**, indicating failure.
+
+# ```text
+# exit 0  → Success ✅
+# exit 1  → Failure ❌
+# ```
+
+# Therefore:
+
+# ```yaml
+# - name: Failed step
+#   run: |
+#     echo "I will fail"
+#     exit 1
+# ```
+
+# results in:
+
+# ```text
+# echo "I will fail" → Success ✅
+# exit 1             → Failure ❌
+#                          ↓
+#                   Entire step fails
+# ```
+
+# ---
+
+# ### 4. What happens to the next step?
+
+# By default, when a step fails:
+
+# ```yaml
+# - name: Failed step
+#   run: |
+#     echo "I will fail"
+#     exit 1
+
+# - name: Say goodbye
+#   run: echo "Goodbye!"
+# ```
+
+# the result is:
+
+# ```text
+# Failed step   → ❌ Failed
+# Say goodbye   → ⏭️ Skipped
+# Job           → ❌ Failed
+# ```
+
+# ---
+
+# ### 5. Run the next step even after failure
+
+# Use:
+
+# ```yaml
+# if: always()
+# ```
+
+# ```yaml
+# - name: Say goodbye
+#   if: always()
+#   run: echo "Goodbye!"
+# ```
+
+# Now:
+
+# ```text
+# Failed step   → ❌ Failed
+# Say goodbye   → ✅ Runs
+# ```
+
+# ### Remember
+
+# > **`|` = multiple commands in one step**
+# > **`exit 1` = failure**
+# > **Non-zero exit code = step fails**
+# > **Failed step → following steps are skipped by default**
