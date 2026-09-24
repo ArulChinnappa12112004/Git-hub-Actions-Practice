@@ -1,0 +1,31 @@
+name : 02 - workflows-events
+on : push
+
+jobs:
+    echo:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Show the trigger
+              run: echo " I've been triggered by a{n} ${{github.event_name}}."
+            
+# So when you push code to GitHub:
+
+# git push
+#    ↓
+# GitHub receives push
+#    ↓
+# push event happens
+#    ↓
+# GitHub Actions starts workflow
+
+# GitHub knows:
+
+# event_name = push
+
+# Therefore:
+
+# ${{ github.event_name }}
+
+# becomes:
+
+# push
