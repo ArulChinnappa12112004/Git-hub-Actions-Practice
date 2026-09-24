@@ -1,5 +1,5 @@
 
-The easiest way to understand it is:
+**he easiest way to understand it is:**
 
 > **GitHub Actions is an automation system built into GitHub that can automatically perform tasks when something happens in your repository.**
 
