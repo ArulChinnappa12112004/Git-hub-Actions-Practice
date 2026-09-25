@@ -1,0 +1,20 @@
+name : 04 - GitHub Runner Workflow
+on : 
+    push:
+
+jobs:
+    ubuntu-runner:
+        runs-on : ubuntu-latest
+        steps:
+            - name: Show OS
+              run: |
+                echo "Running GitHub Runner..."
+                echo "Machine : $RUNNER_OS"
+    windows-runner:
+        runs-on : windows-latest
+        steps:
+         - name: Show OS
+           shell: bash
+           run: |
+                echo "Running GitHub Runner..."
+                echo "Machine : $RUNNER_OS"
