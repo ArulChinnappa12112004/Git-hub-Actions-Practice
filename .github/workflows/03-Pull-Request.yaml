@@ -1,0 +1,15 @@
+name: Pull Request Workflow
+
+on:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Show trigger
+        run: echo "Workflow triggered by ${{ github.event_name }}"
+
+      - name: Test
+        run: echo "Running tests..."
